@@ -14,7 +14,6 @@ stages:
  - test
  - release
  - publish
- - cleanup
 
 interface:
   cache: {}
@@ -107,6 +106,12 @@ hybrixd:
     - sleep 30
     - setup_docker
     - build
+  except:
+   refs:
+     - tags
+  only:
+    variables:
+      - $TEST_ENABLED
   artifacts:
     paths:
     - ./*
@@ -154,24 +159,6 @@ publish:
     refs:
       - tags
 
-
-stop_review:
-  stage: cleanup
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - delete
-  environment:
-    name: interface-review
-    action: stop
-  when: manual
-  allow_failure: true
-  only:
-    refs:
-      - tags
-  artifacts:
-    paths:
-      - ./
 
 # ---------------------------------------------------------------------------
 
