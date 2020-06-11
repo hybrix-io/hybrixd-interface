@@ -1,6 +1,6 @@
 {
   "name": "hybrix-jslib",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "description": "javascript client library to interface with hybrixd",
   "main": "hybrix-lib.nodejs.js",
   "directories": {
@@ -22,7 +22,7 @@
     "build": "sh ./scripts/npm/compile.sh; sh ./scripts/npm/dist.sh",
     "check": "sh scripts/npm/check.sh",
     "lint": "sh ../common/scripts/lint/lint.sh interface",
-    "clean" : "rm -rf dist/*"
+    "clean": "rm -rf dist/*"
   },
   "repository": {
     "type": "git",
