@@ -1,7 +1,9 @@
+const Decimal = require('../../common/crypto/decimal-light');
+
 const render = require('./render.js');
 const knownIssues = require('./knownIssues.js').knownIssues;
 const valid = require('./valid.js');
-const DEFAULT_AMOUNT = 0.00001;
+const DEFAULT_ATOMIC_AMOUNT = 1000;
 
 const DEFAULT_TEST_SYMBOLS = [
   'bch',
@@ -38,6 +40,11 @@ const DEFAULT_TEST_SYMBOLS = [
   // 'xel' -> HOST issues
 ];
 
+function fromAtomic (x, factor) {
+  const decX = new Decimal(x);
+  return decX.div(new Decimal(10).pow(factor)).toFixed();
+}
+
 function sanitizeResult (result) {
   const props = ['sample', 'details', 'test'];
   result = typeof result === 'undefined' ? {} : result;
@@ -70,19 +77,19 @@ const testCases = result => {
 
 const testIds = Object.keys(testCases({}));
 
-function getFeeForUnspents (amount, details) {
-  const fee = details.fee;
-  if (typeof fee === 'string') {
-    return Number(amount) + Number(fee);
-  } else if (typeof fee === 'number') {
-    return Number(amount) + fee;
-  } else if (typeof fee === 'object' && fee !== null) {
-    return Number(amount) + Number(Object.values(fee)[0]);
+function getFeeForUnspents (nonAtomicAmount, feeAmount, details) {
+  if (typeof feeAmount === 'string' || typeof feeAmount === 'number') {
+    return details['fee-symbol'] === details.symbol
+      ? new Decimal(nonAtomicAmount).add(new Decimal(feeAmount)).toFixed()
+      : nonAtomicAmount;
+  } else if (typeof feeAmount === 'object' && feeAmount !== null) {
+    return feeAmount.hasOwnProperty(details.symbol)
+      ? new Decimal(nonAtomicAmount).add(new Decimal(feeAmount[details.symbol])).toFixed()
+      : nonAtomicAmount;
   } else {
     return NaN;
   }
 }
-
 function testAsset (symbol) {
   return { data: [
     {symbol: symbol}, 'addAsset',
@@ -97,7 +104,7 @@ function testAsset (symbol) {
     'parallel',
     result => {
       result = sanitizeResult(result);
-      const amount = result.test.amount || DEFAULT_AMOUNT;
+      const amount = result.test.amount || fromAtomic(DEFAULT_ATOMIC_AMOUNT, result.details.factor);
       return {
         _options: {passErrors: true},
         sample: {data: result.sample, step: 'id'},
@@ -107,20 +114,20 @@ function testAsset (symbol) {
 
         sampleValid: {data: {query: '/asset/' + symbol + '/validate/' + result.sample.address}, step: 'rout'},
         sampleBalance: {data: {query: '/asset/' + symbol + '/balance/' + result.sample.address}, step: 'rout'},
-        sampleUnspent: {data: {query: '/asset/' + symbol + '/unspent/' + result.sample.address + '/' + (getFeeForUnspents(amount, result.details)) + '/' + result.address + '/' + result.sample.publicKey}, step: 'rout'},
+        sampleUnspent: {data: {query: '/asset/' + symbol + '/unspent/' + result.sample.address + '/' + (getFeeForUnspents(amount, result.details.fee, result.details)) + '/' + result.address + '/' + result.sample.publicKey}, step: 'rout'},
         sampleHistory: {data: {query: '/asset/' + symbol + '/history/' + result.sample.address}, step: 'rout'},
         sampleTransaction: {data: {query: '/asset/' + symbol + '/transaction/' + result.sample.transaction}, step: 'rout'},
 
         seedValid: {data: {query: '/asset/' + symbol + '/validate/' + result.address}, step: 'rout'},
         seedBalance: {data: {query: '/asset/' + symbol + '/balance/' + result.address}, step: 'rout'},
-        seedUnspent: {data: {query: '/asset/' + symbol + '/unspent/' + result.address + '/' + (getFeeForUnspents(amount, result.details)) + '/' + result.sample.address + '/' + result.publicKey}, step: 'rout'}
+        seedUnspent: {data: {query: '/asset/' + symbol + '/unspent/' + result.address + '/' + (getFeeForUnspents(amount, result.details.fee, result.details)) + '/' + result.sample.address + '/' + result.publicKey}, step: 'rout'}
         // seedHistory: {data: {query: '/asset/' + symbol + '/history/' + result.address}, step: 'rout'}
       };
     },
     'parallel',
     result => {
       result = sanitizeResult(result);
-      const amount = result.test.amount || DEFAULT_AMOUNT;
+      const amount = result.test.amount || fromAtomic(DEFAULT_ATOMIC_AMOUNT, result.details.factor);
       return {
         _options: {passErrors: true},
         test: {data: result.test, step: 'id'},
