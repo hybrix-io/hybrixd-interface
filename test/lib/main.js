@@ -1,7 +1,6 @@
 const Decimal = require('../../common/crypto/decimal-light');
 
 const render = require('./render.js');
-const knownIssues = require('./knownIssues.js').knownIssues;
 const valid = require('./valid.js');
 const DEFAULT_ATOMIC_AMOUNT = 1000;
 
@@ -154,7 +153,7 @@ function testAsset (symbol) {
   };
 }
 
-const validate = symbols => results => {
+const validate = (symbols, knownIssues) => results => {
   const assets = {};
   let total = 0;
   let failures = 0;
@@ -171,12 +170,11 @@ const validate = symbols => results => {
           const isValid = valid[testId](result, details, test);
           let known;
           if (!isValid) {
-            known = knownIssues[symbol + '_' + testId];
             if (!known) ++failures;
           }
           assets[symbol][testId] = {valid: isValid, known, result, messages: ['TODO']};
         } else {
-          const known = knownIssues[symbol + '_' + testId];
+          const known = knownIssues ? knownIssues[symbol + '_' + testId] : undefined;
           assets[symbol][testId] = {valid: false, known, result, messages: ['No validation available']};
           ++failures;
         }
@@ -184,7 +182,7 @@ const validate = symbols => results => {
       }
     } else {
       for (let testId of testIds) {
-        const known = knownIssues[symbol + '_' + testId];
+        const known = knownIssues ? knownIssues[symbol + '_' + testId] : undefined;
         assets[symbol][testId] = {valid: false, known, result: null, messages: ['Asset not available']};
         ++total;
         ++failures;
@@ -199,7 +197,7 @@ const validate = symbols => results => {
   return data;
 };
 
-function runTests (symbols, hybrix, host, dataCallback, progressCallback) {
+function runTests (symbols, hybrix, host, dataCallback, progressCallback, knownIssues) {
   const tests = {};
   if (symbols && symbols !== '*') {
     symbols = symbols.split(',');
@@ -217,7 +215,7 @@ function runTests (symbols, hybrix, host, dataCallback, progressCallback) {
       {host: host}, 'addHost',
       tests,
       'parallel',
-      validate(symbols)
+      validate(symbols, knownIssues)
     ]
     , dataCallback
     , error => { console.error(error); }
