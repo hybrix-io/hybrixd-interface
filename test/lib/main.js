@@ -77,6 +77,7 @@ const testCases = result => {
 const testIds = Object.keys(testCases({}));
 
 function getFeeForUnspents (nonAtomicAmount, feeAmount, details) {
+  if (typeof nonAtomicAmount !== 'string' && typeof nonAtomicAmount !== 'number') return NaN;
   if (typeof feeAmount === 'string' || typeof feeAmount === 'number') {
     return details['fee-symbol'] === details.symbol
       ? new Decimal(nonAtomicAmount).add(new Decimal(feeAmount)).toFixed()
