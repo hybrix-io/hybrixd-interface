@@ -77,7 +77,7 @@ hybrixd:
     - mv ./dist.sh /tmp/dist.sh
     - mv ./package.json /tmp/package.json
 
-    - "curl -s --location --header \"JOB-TOKEN: $CI_JOB_TOKEN\" \"https://gitlab.com/api/v4/projects/${PROJECT_REF_ID}/jobs/artifacts/master/download?job=hybrixd\" -o artifacts-${PROJECT_REF_NAME}.zip"
+    - "curl -s --location --header \"PRIVATE-TOKEN:$HYBRIX_BOT_GITLAB_PIPELINE_TOKEN\" \"https://gitlab.com/api/v4/projects/${PROJECT_REF_ID}/jobs/artifacts/master/download?job=hybrixd\" -o artifacts-${PROJECT_REF_NAME}.zip"
     - unzip -qq -o artifacts-hybrixd.zip  -d ./
 
     # remove the zip-file (|| true --> on error, no problem)
@@ -181,7 +181,7 @@ publish:
     npm install -g jsdoc
 
     # download common repo
-    curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" "https://gitlab.com/api/v4/projects/hybrix%2Fhybrixd%2Fcommon/jobs/artifacts/master/download?job=common" -o artifacts-common.zip
+    curl --location --header "PRIVATE-TOKEN:$HYBRIX_BOT_GITLAB_PIPELINE_TOKEN" "https://gitlab.com/api/v4/projects/hybrix%2Fhybrixd%2Fcommon/jobs/artifacts/master/download?job=common" -o artifacts-common.zip
 
     # remove link to common and unzip the downloaded artifact to the directory (|| true --> on error, no problem)
     rm -rf  common || true
