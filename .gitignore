@@ -1,4 +1,4 @@
 node_binaries
 node_modules/.cache/*
 common
-lib/methods/rawTransaction/project-xhy
+lib/methods/rawTransaction/hyProtocol

@@ -85,10 +85,6 @@ if [ ! -e "$INTERFACE/common" ];then
 
 fi
 
-if [ -e "$HYBRIXD/project-xhy" ]; then
-    ln -sf "$HYBRIXD/project-xhy" "$INTERFACE/lib/methods/rawTransaction/project-xhy"
-fi
-
 # NODE
 if [ ! -e "$HYBRIXD/node" ];then
     echo "[!] node not found."
