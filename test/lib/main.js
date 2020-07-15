@@ -15,7 +15,7 @@ const DEFAULT_TEST_SYMBOLS = [
   'dash',
   'dgb',
   'etc',
-  'exp',
+  // 'exp', depreciated
   'lsk',
   'ltc',
   'nxt',
