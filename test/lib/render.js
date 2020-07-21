@@ -1,13 +1,10 @@
 const valid = require('./valid.js');
+const renderLib = require('../util/render')
+const issueLib = require('../util/issue')
 
 const TESTS_PER_ASSET = 12;
 
-function stringify(x){
-  return typeof x === 'undefined' ? 'undefined' : JSON.stringify(x);
-}
-
-const renderSymbol = (renderCell, symbol, data, messages, newMessages) => {
-
+const renderSymbol = (renderCell, symbol, data, messages, newMessages, isTestingHosts) => {
   const results = [];
   for(let testId in data){
     const x = data[testId];
@@ -16,14 +13,14 @@ const renderSymbol = (renderCell, symbol, data, messages, newMessages) => {
     const result = x.result;
     const validationMessages = data.messages;
 
-    const testResult = renderCell(symbol, testId, valid, known, result, messages, newMessages);
+    const testResult = renderCell(symbol, testId, valid, known, result, messages, newMessages, isTestingHosts);
     results.push(testResult);
   }
   return results;
 };
 
 const renderCellCLI = (symbol,testId, valid, known, result, messages,newMessages) => {
-  const title = stringify(result).replace(/"/g, '');
+  const title = renderLib.stringify(result).replace(/"/g, '');
   if(known){
     if(valid){
       if(known.link){
@@ -47,75 +44,6 @@ const renderCellCLI = (symbol,testId, valid, known, result, messages,newMessages
     return '\033[31mFAIL\033[0m';
   }
 };
-
-function issueLink (symbol, type, issue, title) {
- const description = issue && issue.message
-   ? issue.message
-   : 'returned ' +  title;
-  return `https://gitlab.com/hybrix/hybrixd/node/issues/new?issue[description]=${encodeURIComponent(`/label ~"\\* Development Team \\*"\n/milestone %"DEV - asset maintenance - 2020-Q1"\n${description}`)}&issue[title]=${encodeURIComponent(symbol+' '+type+' '+description)}`;
-}
-
-const renderCellWeb = (symbol,type,valid,known, data, messages, newMessages) => {
-  const title = stringify(data).replace(/"/g, '');
-
-  if(known){
-    if(valid){
-
-      if(known.link){
-        messages.push('<b style="color:purple;">'+symbol+ ' '+type+'</b> : <a  name="'+symbol+'_'+type+'" target="_blank" href="'+known.link+'">'+known.message+'</a>');
-      }else{
-        messages.push('<b style="color:purple;">'+symbol+ ' '+type+'</b> : <a name="'+symbol+'_'+type+'">'+known.message+' </a><a style="color:red;"target="_blank" href="'+issueLink(symbol,type,known,known.message)+'"><b>Create issue</b></a>');
-      }
-
-
-      return '<td style="text-align:center;background-color:purple" title="' + title + '"><a style="text-decoration:none; width: 100%;height: 100%;display: block;" href="#'+symbol+'_'+type+'">&nbsp;</a></td>';
-
-    }else{
-      if(known.link){
-        messages.push('<b style="color:orange;">'+symbol+ ' '+type+'</b> : <a  name="'+symbol+'_'+type+'" target="_blank" href="'+known.link+'">'+known.message+' (returned '+title+')</a>');
-      }else{
-        messages.push('<b style="color:orange;">'+symbol+ ' '+type+'</b> : <a name="'+symbol+'_'+type+'">'+known.message+' </a><a style="color:red;"target="_blank" href="'+issueLink(symbol,type,known,known.message)+'"><b>Create issue</b></a>');
-      }
-      return '<td style="text-align:center;background-color:orange" title="' + title + '"><a style="text-decoration:none; width: 100%;height: 100%;display: block;" href="#'+symbol+'_'+type+'">&nbsp;</a></td>';
-    }
-  } else if (valid) {
-    return '<td style="text-align:center;background-color:green" title="' + title + '">&nbsp;</td>';
-  } else {
-
-    newMessages.push('<b style="color:red;">'+symbol+ ' '+type+'</b> : returned '+title+' <a  name="'+symbol+'_'+type+'" style="color:red;"target="_blank" href="'+issueLink(symbol,type, undefined, title)+'"><b>Create issue</b></a>');
-
-    return '<td style="text-align:center;background-color:red"  title="' + title + '"><a style="text-decoration:none; width: 100%;height: 100%;display: block;" href="#'+symbol+'_'+type+'">&nbsp;</a></td>';
-  }
-};
-
-const renderCellXML = (symbol,testId, valid, known, result, messages,newMessages) => {
-
-
-  const title = stringify(result).replace(/"/g, '');
-  let r =  `<testcase id="${symbol+'_'+testId}" name="${symbol+' '+testId}" time="0.001">`
-  if (!valid) {
-    r+=`<failure message="${title}" type="ERROR"></failure>`
-  }
-  r+=`</testcase>`
-  return r;
-};
-
-const renderTableXML = data => {
-  const messages = [];
-  const newMessages = [];
-
-  let r='';
-  for (let symbol in data.assets) {
-      r = renderSymbol(renderCellXML, symbol, data.assets[symbol],messages,newMessages).join('');
-  }
-  r='<?xml version="1.0" encoding="UTF-8" ?><testsuites id="hybrix" name="hybrix" tests="'+data.total+'" failures="'+(data.failures)+'" time="0.001"><testsuite id="testsuite.hybrix" name="hybrix" tests="'+data.total+'" failures="'+(data.failures)+'" time="0.001">'+r;
-  r+='</testsuite></testsuites>';
-  return r;
-}
-
-const renderTableJSON = data => {
-  return stringify(data);
-}
 
 const renderTableCLI = data => {
 
@@ -184,7 +112,7 @@ const renderTableWeb = data => {
   for (let symbol in data.assets) {
     r += '<tr>';
     r += '<td>' + symbol + '</td>';
-    r += renderSymbol(renderCellWeb, symbol, data.assets[symbol],messages,newMessages).join('');
+    r += renderSymbol(renderLib.renderCellWeb, symbol, data.assets[symbol],messages,newMessages, false).join('');
     r += '</tr>';
   }
   r += '</table>';
@@ -208,7 +136,6 @@ const renderTableWeb = data => {
   return r;
 };
 
-exports.xml = renderTableXML;
-exports.json = renderTableJSON;
 exports.cli = renderTableCLI;
 exports.web = renderTableWeb;
+exports.renderSymbol = renderSymbol;
