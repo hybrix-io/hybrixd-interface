@@ -23,6 +23,8 @@ if [ "$1" = "debug" ] || [ "$1" = "development" ]; then
 
   "$INTERFACE/node_modules/webpack/bin/webpack.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.web.js" --mode development
   "$INTERFACE/node_modules/webpack/bin/webpack.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.nodejs.js" --mode development
+  "$INTERFACE/node_modules/webpack/bin/webpack.js" --entry "./test/hosts/lib/web.js" -o "./test/hosts/test.web.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.web.js" --mode development
+  "$INTERFACE/node_modules/webpack/bin/webpack.js" --entry "./test/hosts/lib/main.js" -o "./dist/test.host.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.nodejs.js" --mode development
 else
   echo "[i] Webpack Production mode : uglify";
   "$INTERFACE/node_modules/webpack/bin/webpack.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.nodejs.js" --mode production
@@ -32,6 +34,8 @@ else
 
   "$INTERFACE/node_modules/webpack/bin/webpack.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.web.js" --mode production
   "$INTERFACE/node_modules/webpack/bin/webpack.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.nodejs.js" --mode production
+  "$INTERFACE/node_modules/webpack/bin/webpack.js" --entry "./test/hosts/lib/web.js" -o "./test/hosts/test.web.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.web.js" --mode production
+  "$INTERFACE/node_modules/webpack/bin/webpack.js" --entry "./test/hosts/lib/main.js" -o "./dist/test.host.js" --config "$INTERFACE/conf/webpack.config.hybrixd.interface.test.nodejs.js" --mode production
 fi
 
 # fuse the packed files together (with license information)

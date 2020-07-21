@@ -1,43 +1,10 @@
 const Decimal = require('../../common/crypto/decimal-light');
 
 const render = require('./render.js');
+const renderLib = require('../util/render');
 const valid = require('./valid.js');
 const DEFAULT_ATOMIC_AMOUNT = 1000;
-
-const DEFAULT_TEST_SYMBOLS = [
-  'bch',
-  'dummy',
-  'eth',
-  'flo',
-  'ark',
-  'btc',
-  'burst',
-  'dash',
-  'dgb',
-  'etc',
-  // 'exp', depreciated
-  'lsk',
-  'ltc',
-  'nxt',
-  'omni',
-  'rise',
-  'shift',
-  'ubq',
-  'waves',
-  'xcp',
-  'xem',
-  'xrp',
-  'zec',
-  'mock.btc',
-  'eth.xhy',
-  'waves.xhy',
-  'nxt.xhy',
-  'omni.xhy',
-  'xcp.xhy',
-  'xem.xhy'
-  // 'bts' -> FAUCET, ETC!
-  // 'xel' -> HOST issues
-];
+const DEFAULT_TEST_SYMBOLS = require('./../util/defaultSymbols').DEFAULT_TEST_SYMBOLS;
 
 function fromAtomic (x, factor) {
   const decX = new Decimal(x);
@@ -225,7 +192,7 @@ function runTests (symbols, hybrix, host, dataCallback, progressCallback, knownI
 }
 
 exports.runTests = runTests;
-exports.xml = render.xml;
 exports.web = render.web;
-exports.json = render.json;
 exports.cli = render.cli;
+exports.xml = renderLib.xml;
+exports.renderSymbol = render.renderSymbol;

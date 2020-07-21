@@ -1,44 +1,12 @@
 const main = require('./main.js');
+const hostTest = require('../hosts/lib/main.js');
 const stdio = require('stdio');
 const fs = require('fs');
-const ProgressBar = require('progress');
+const progress = require('./../util/progressbar')
+const render = require('./../util/render');
 
 let host = 'http://localhost:1111/';
 let path = '../../dist/';
-
-let lastP;
-let bar;
-
-function makeProgressBar (title) {
-  bar = new ProgressBar(' [.] ' + title + ': [:bar] :percent, eta: :etas', {
-    complete: '▓',
-    incomplete: '░',
-    width: 76 - title.length,
-    total: 100
-  });
-}
-
-makeProgressBar('test progress');
-
-const progressCallback = progress => {
-  if (!ops.quiet) {
-    if (ops.verbose) {
-      const s = String(progress * 100).split('.');
-      let P;
-      if (s.length === 1) {
-        P = s[0] + '.0';
-      } else {
-        P = s[0] + '.' + s[1][0];
-      }
-      if (P !== lastP) {
-        process.stdout.write(P + '%\r');
-        lastP = P;
-      }
-    } else {
-      bar.update(progress);
-    }
-  }
-};
 
 // command line options and init
 const ops = stdio.getopt({
@@ -49,7 +17,8 @@ const ops = stdio.getopt({
   'verbose': {key: 'v', args: 0, description: 'Output verbose progress'},
   'quiet': {key: 'q', args: 0, description: 'No extra output other than raw data'},
   'xml': {key: 'x', args: 1, description: 'Write xml test results to file'},
-  'json': {key: 'j', args: 1, description: 'Write json test results to file'}
+  'json': {key: 'j', args: 1, description: 'Write json test results to file'},
+  'testhost': {key: 't', args: 0, description: 'Switch between asset and host test. Defaults to asset'},
 });
 
 if (typeof ops.host !== 'undefined') { host = ops.host; }
@@ -61,14 +30,16 @@ const hybrix = new Hybrix.Interface({http: require('http'), https: require('http
 
 DEBUG = ops.debug;
 
+const test = typeof ops.testhost !== 'undefined' ? hostTest : main;
+
 const renderTable = data => {
   if (ops.xml) {
-    fs.writeFileSync(ops.xml, main.xml(data));
+    fs.writeFileSync(ops.xml, render.xml(test.renderSymbol)(data));
   }
   if (ops.json) {
-    fs.writeFileSync(ops.json, main.json(data));
+    fs.writeFileSync(ops.json, render.json(data));
   }
-  console.log(main.cli(data));
+  console.log(test.cli(data));
 };
 
-main.runTests(symbolsToTest, hybrix, host, renderTable, progressCallback);
+test.runTests(symbolsToTest, hybrix, host, renderTable, progress.progressCallback(ops.quiet, ops.verbose));
