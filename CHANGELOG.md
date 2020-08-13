@@ -1,3 +1,9 @@
+# v0.5.15
+## 13-08-2020
+
+* refreshAsset now automatically adds the asset if required 
+
+
 # v0.5.14
 ## 29-07-2020
 
