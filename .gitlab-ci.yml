@@ -478,7 +478,7 @@ publish:
     echo "[.] Modify package.json for github"
     sed -i -e 's+"name": "+"name": "@hybrix-io/+g' package.json
 
-    echo "//npm.pkg.github.com/:_authToken=$GITHUB_PAT" > .npmrc
+    echo "//npm.pkg.github.com/:_authToken=$GITHUB_RECIPE_EDITOR_TOKEN" > .npmrc
     echo "@hybrix-io:registry=https://npm.pkg.github.com" >> .npmrc
 
     echo "[.] Publish to github packages"
