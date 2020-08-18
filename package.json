@@ -34,7 +34,8 @@
   "devDependencies": {
     "uglify-es": "^3.3.9",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "terser-webpack-plugin": "*"
   },
   "bugs": {
     "url": "https://github.com/hybrix-io/hybrix-jslib/issues"
