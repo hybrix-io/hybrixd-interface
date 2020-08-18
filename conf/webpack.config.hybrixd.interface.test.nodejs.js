@@ -1,5 +1,4 @@
-// import nodeExternals from 'webpack-node-externals';
-
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -10,5 +9,16 @@ module.exports = {
     filename: '../dist/test.js',
     library: 'HybrixTest',
     libraryTarget: 'commonjs2'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/
+      }
+    ]
+  },
+  optimization: {
+    minimizer: [new TerserPlugin()]
   }
 };
