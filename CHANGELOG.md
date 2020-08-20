@@ -1,3 +1,14 @@
+# v0.5.16
+## 20-08-2020
+
+* Add option for partial source address
+* Update dependencies
+* improve ES6 minification
+
+
+
+
+
 # v0.5.15
 ## 13-08-2020
 
