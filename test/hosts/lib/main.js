@@ -62,7 +62,6 @@ function runTests (symbols, hybrix, host, dataCallback, progressCallback) {
 
   hybrix.sequential(
     [
-      'init',
       {host}, 'addHost',
       tests,
       'parallel',
