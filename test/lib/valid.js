@@ -50,7 +50,7 @@ function sample (sample) {
 }
 
 function transaction (transaction) {
-  return hasProperties(transaction, 'id', 'timestamp', 'amount', 'symbol', 'source', 'target', 'confirmed') && fee(transaction);
+  return hasProperties(transaction, 'id', 'timestamp', 'amount', 'symbol', 'source', 'target') && fee(transaction);
 }
 
 function sign (sign) {
