@@ -1,3 +1,15 @@
+# v0.5.17
+## 01-09-2020
+
+* Add burn method
+* Handle more errors during session interruption
+* Align load command to api
+* Automate initialization, init is no longer required explicitly
+* Improve parallel, sequential and call methods
+
+
+
+
 # v0.5.16
 ## 20-08-2020
 
