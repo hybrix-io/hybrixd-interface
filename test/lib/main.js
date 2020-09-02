@@ -135,7 +135,7 @@ const validate = (symbols, knownIssues) => results => {
       for (let testId in symbolResult) {
         const result = symbolResult[testId];
         if (valid.hasOwnProperty(testId)) {
-          const isValid = valid[testId](result, details, test);
+          const isValid = valid[testId](result, details, test, symbolResult);
           let known;
           if (!isValid) {
             if (!known) ++failures;
