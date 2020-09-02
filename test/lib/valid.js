@@ -57,7 +57,8 @@ function sign (sign) {
   return typeof sign === 'string' && !sign.startsWith('ERROR');
 }
 
-function signHash (signHash, details, test) {
+function signHash (signHash, details, test, symbolResult) {
+  if (typeof symbolResult.sign !== 'string' || !sign.startsWith('ERROR')) return false;
   if (test.hasOwnProperty('hash')) {
     const testHash = test.hash;
     return signHash === testHash || (testHash === 'dynamic' && signHash !== '00000000');
