@@ -1,3 +1,12 @@
+# v0.6.0
+## 03-09-2020
+
+* Autodetect environment (no longer required to pass connectors explicitly)
+* Add list method for storage 
+
+
+
+
 # v0.5.17
 ## 01-09-2020
 
