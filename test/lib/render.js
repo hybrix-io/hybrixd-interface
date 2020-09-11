@@ -1,8 +1,4 @@
-const valid = require('./valid.js');
 const renderLib = require('../util/render');
-const issueLib = require('../util/issue');
-
-const TESTS_PER_ASSET = 12;
 
 const renderTableCLI = data => {
   const messages = [];
