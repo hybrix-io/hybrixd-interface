@@ -1,3 +1,14 @@
+# v0.6.1
+## 11-09-2020
+
+* Update unified assets
+* Improve error handling with nested callbacks
+* Add failIfAnyFails option to parallel
+
+
+
+
+
 # v0.6.0
 ## 03-09-2020
 
