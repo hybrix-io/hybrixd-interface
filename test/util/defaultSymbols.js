@@ -9,6 +9,7 @@ const DEFAULT_TEST_SYMBOLS = [
   'dash',
   'dgb',
   'etc',
+  'hy',
   // 'exp', depreciated
   'lsk',
   'ltc',
