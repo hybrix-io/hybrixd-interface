@@ -23,8 +23,8 @@ const DEFAULT_TEST_SYMBOLS = [
   'zec',
   'mock.btc',
   'eth.hy',
-  'tomo.hy'
-  'hy',
+  'tomo.hy',
+  'hy'
   // 'xel', deprecated
   // 'exp', deprecated
 ];
