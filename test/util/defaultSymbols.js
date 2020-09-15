@@ -9,8 +9,6 @@ const DEFAULT_TEST_SYMBOLS = [
   'dash',
   'dgb',
   'etc',
-  'hy',
-  // 'exp', depreciated
   'lsk',
   'ltc',
   'nxt',
@@ -24,14 +22,11 @@ const DEFAULT_TEST_SYMBOLS = [
   'xrp',
   'zec',
   'mock.btc',
-  'eth.xhy',
-  'waves.xhy',
-  'nxt.xhy',
-  'omni.xhy',
-  'xcp.xhy',
-  'xem.xhy'
-  // 'bts' -> FAUCET, ETC!
-  // 'xel' -> HOST issues
+  'eth.hy',
+  'tomo.hy'
+  'hy',
+  // 'xel', deprecated
+  // 'exp', deprecated
 ];
 
 exports.DEFAULT_TEST_SYMBOLS = DEFAULT_TEST_SYMBOLS;
