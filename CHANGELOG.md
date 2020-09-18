@@ -1,3 +1,12 @@
+# v0.6.2
+## 18-09-2020
+
+* Export private key for multi-address asset
+* Add asset automatically for asset method
+
+
+
+
 # v0.6.1
 ## 11-09-2020
 

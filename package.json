@@ -1,6 +1,6 @@
 {
   "name": "hybrix-jslib",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "javascript client library to interface with hybrixd",
   "main": "hybrix-lib.nodejs.js",
   "directories": {
