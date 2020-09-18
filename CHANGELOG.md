@@ -1,8 +1,15 @@
+# v0.6.1
+## 11-09-2020
+
+* Update unified assets
+* Improve error handling with nested callbacks
+* Add failIfAnyFails option to parallel
+
 # v0.6.0
 ## 03-09-2020
 
 * Autodetect environment (no longer required to pass connectors explicitly)
-* Add list method for storage 
+* Add list method for storage
 
 
 
@@ -33,7 +40,7 @@
 # v0.5.15
 ## 13-08-2020
 
-* refreshAsset now automatically adds the asset if required 
+* refreshAsset now automatically adds the asset if required
 
 
 # v0.5.14
@@ -60,7 +67,3 @@
 * Reconnect session if lost
 * Improve import/export of deterministic code
 * Keep old balance if failed to retrieve update
-
-
-
-
