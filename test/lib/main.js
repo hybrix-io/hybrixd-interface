@@ -23,6 +23,7 @@ function sanitizeResult (result) {
 const testCases = result => {
   result = sanitizeResult(result);
   return {
+    _options: {passErrors: true},
     test: {data: result.test, step: 'id'},
     sample: {data: result.sample, step: 'id'},
     details: {data: result.details, step: 'id'},
@@ -41,7 +42,7 @@ const testCases = result => {
   };
 };
 
-const testIds = Object.keys(testCases({}));
+const testIds = Object.keys(testCases({})).filter(id => id !== '_options');
 
 function getFeeForUnspents (nonAtomicAmount, feeAmount, details) {
   if (typeof nonAtomicAmount !== 'string' && typeof nonAtomicAmount !== 'number') return NaN;
@@ -166,15 +167,12 @@ const validate = (symbols, knownIssues) => results => {
 };
 
 function runTests (symbols, hybrix, host, dataCallback, progressCallback, knownIssues) {
-  const tests = {};
-  if (symbols && symbols !== '*') {
-    symbols = symbols.split(',');
-  } else {
-    symbols = DEFAULT_TEST_SYMBOLS;
-  }
-  for (let symbol of symbols) {
-    tests[symbol] = testAsset(symbol);
-  }
+  const tests = {
+    _options: {passErrors: true}
+  };
+  symbols = symbols && symbols !== '*' ? symbols.split(',') : DEFAULT_TEST_SYMBOLS;
+
+  for (let symbol of symbols) tests[symbol] = testAsset(symbol);
 
   hybrix.sequential(
     [
