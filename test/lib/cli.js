@@ -2,7 +2,7 @@ const main = require('./main.js');
 const hostTest = require('../hosts/lib/main.js');
 const stdio = require('stdio');
 const fs = require('fs');
-const progress = require('./../util/progressbar')
+const progress = require('./../util/progressbar');
 const render = require('./../util/render');
 
 let host = 'http://localhost:1111/';
@@ -18,7 +18,7 @@ const ops = stdio.getopt({
   'quiet': {key: 'q', args: 0, description: 'No extra output other than raw data'},
   'xml': {key: 'x', args: 1, description: 'Write xml test results to file'},
   'json': {key: 'j', args: 1, description: 'Write json test results to file'},
-  'testhost': {key: 't', args: 0, description: 'Switch between asset and host test. Defaults to asset'},
+  'testhost': {key: 't', args: 0, description: 'Switch between asset and host test. Defaults to asset'}
 });
 
 if (typeof ops.host !== 'undefined') { host = ops.host; }
@@ -42,4 +42,8 @@ const renderTable = data => {
   console.log(test.cli(data));
 };
 
-test.runTests(symbolsToTest, hybrix, host, renderTable, progress.progressCallback(ops.quiet, ops.verbose));
+const errorCallback = error => {
+  console.error(`[!] Error:`, error);
+};
+
+test.runTests(symbolsToTest, hybrix, host, renderTable, errorCallback, progress.progressCallback(ops.quiet, ops.verbose));

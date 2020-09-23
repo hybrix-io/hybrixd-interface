@@ -129,7 +129,7 @@ const validate = (symbols, knownIssues) => results => {
   for (let symbol in results) {
     assets[symbol] = {};
     const symbolResult = results[symbol];
-    if (symbols.includes(symbol) && typeof symbolResult !== 'undefined') {
+    if (symbols.includes(symbol) && typeof symbolResult === 'object' && symbolResult !== null) {
       const details = symbolResult.details || {};
       const test = symbolResult.test || {};
 
@@ -151,8 +151,9 @@ const validate = (symbols, knownIssues) => results => {
       }
     } else {
       for (let testId of testIds) {
+        const result = symbolResult || null;
         const known = knownIssues ? knownIssues[symbol + '_' + testId] : undefined;
-        assets[symbol][testId] = {valid: false, known, result: null, messages: ['Asset not available']};
+        assets[symbol][testId] = {valid: false, known, result, messages: ['Asset not available']};
         ++total;
         ++failures;
       }
@@ -166,7 +167,7 @@ const validate = (symbols, knownIssues) => results => {
   return data;
 };
 
-function runTests (symbols, hybrix, host, dataCallback, progressCallback, knownIssues) {
+function runTests (symbols, hybrix, host, dataCallback, errorCallback, progressCallback, knownIssues) {
   const tests = {
     _options: {passErrors: true}
   };
@@ -183,7 +184,7 @@ function runTests (symbols, hybrix, host, dataCallback, progressCallback, knownI
       validate(symbols, knownIssues)
     ]
     , dataCallback
-    , error => { console.error(error); }
+    , errorCallback
     , progressCallback
   );
 }
