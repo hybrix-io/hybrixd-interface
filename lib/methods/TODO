@@ -1,0 +1,7 @@
+TODO
+
+
+list : remote&local -> join
+
+tests including mock local storage
+tests including work check, queue check
