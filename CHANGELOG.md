@@ -1,3 +1,19 @@
+# v0.6.3
+## 27-10-2020
+
+* Add xhr connection failed error
+* Add more methods to hash
+* Parallel: fail if any fails option
+* Implement local storage connectors
+* Add offset to session to generate multiple accounts from same login
+* Add option to work with session key pairs directly
+* Handle non json responses 
+* Add subbalances for unified assets
+* Fix undefineds returned by tests
+
+
+
+
 # v0.6.2
 ## 18-09-2020
 
