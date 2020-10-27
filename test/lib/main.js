@@ -37,7 +37,7 @@ const testCases = result => {
     seedBalance: {data: result.seedBalance, step: 'id'},
     seedUnspent: {data: result.seedUnspent, step: 'id'},
     seedSign: {data: result.seedSign, step: 'id'},
-    seedSignHash: {data: {data: result.seedSign}, step: 'hash'}
+    seedSignHash: {data: {data: result.seedSign, method: 'djb2'}, step: 'hash'}
     // seedHistory: {data: result.seedHistory, step: 'id'},
   };
 };
