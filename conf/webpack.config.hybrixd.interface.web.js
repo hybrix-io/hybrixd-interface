@@ -8,6 +8,9 @@ module.exports = {
     filename: '../dist/hybrixd.interface.web.js.tmp',
     library: 'Hybrix' // added to create a library file
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     rules: [
       {
