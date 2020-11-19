@@ -1,3 +1,15 @@
+# v0.6.4
+## 19-11-2020
+
+
+* Implement throttle on refreshAsset
+* add getBalance method
+* Add file storage connector
+* Improve balance feedback
+
+
+
+
 # v0.6.3
 ## 27-10-2020
 
