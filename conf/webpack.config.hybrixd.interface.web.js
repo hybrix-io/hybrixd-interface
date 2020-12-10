@@ -8,10 +8,22 @@ module.exports = {
     filename: '../dist/hybrixd.interface.web.js.tmp',
     library: 'Hybrix' // added to create a library file
   },
-  node: {
-    fs: 'empty'
+  resolve: {
+    fallback: {
+      fs: false,
+      http: false,
+      https: false,
+      crypto: false,
+      assert: require.resolve('assert'),
+      util: require.resolve('util'),
+      stream: require.resolve('stream-browserify'),
+      buffer: require.resolve('buffer/'),
+      zlib: require.resolve('browserify-zlib')
+    }
   },
+
   module: {
+
     rules: [
       {
         test: /\.js$/,
