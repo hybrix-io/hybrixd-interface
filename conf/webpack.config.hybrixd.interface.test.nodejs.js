@@ -7,7 +7,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '.'),
     filename: '../dist/test.js',
-    library: 'HybrixTest',
     libraryTarget: 'commonjs2'
   },
   module: {

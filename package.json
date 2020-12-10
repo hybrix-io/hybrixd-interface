@@ -30,12 +30,15 @@
   },
   "author": "hybrix",
   "license": "GPL-3.0",
-  "dependencies": {},
   "devDependencies": {
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "stream-browserify": "^3.0.0",
+    "terser-webpack-plugin": "^5.0.3",
     "uglify-es": "^3.3.9",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "terser-webpack-plugin": "*"
+    "webpack": "^5.1.0",
+    "webpack-cli": "^4.2.0"
   },
   "bugs": {
     "url": "https://github.com/hybrix-io/hybrix-jslib/issues"
