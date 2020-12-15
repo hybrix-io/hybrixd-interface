@@ -1,5 +1,6 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './lib/interface.js',
@@ -14,6 +15,7 @@ module.exports = {
       http: false,
       https: false,
       crypto: false,
+      process: false,
       assert: require.resolve('assert'),
       util: require.resolve('util'),
       stream: require.resolve('stream-browserify'),
@@ -21,7 +23,11 @@ module.exports = {
       zlib: require.resolve('browserify-zlib')
     }
   },
-
+  plugins: [ // fix "process is not defined" error:
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
+    })
+  ],
   module: {
 
     rules: [
