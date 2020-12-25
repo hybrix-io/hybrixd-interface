@@ -1,3 +1,13 @@
+# v0.6.5
+## 25-12-2020
+
+* Track pending transactions. Keep an overview of your pending transactions.
+* Upgraded to webpack 5.
+* Update session checks before methods.
+
+
+
+
 # v0.6.4
 ## 19-11-2020
 
