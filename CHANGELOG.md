@@ -1,3 +1,12 @@
+# v0.6.6
+## 08-01-2021
+
+* fix hy balance refresh
+* Release Version 0.6.5
+
+
+
+
 # v0.6.5
 ## 25-12-2020
 
