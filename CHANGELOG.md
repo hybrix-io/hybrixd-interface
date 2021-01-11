@@ -1,8 +1,15 @@
+# v0.6.7
+## 11-01-2021
+
+* Track pending swap deals
+
+
+
+
 # v0.6.6
 ## 08-01-2021
 
-* fix hy balance refresh
-* Release Version 0.6.5
+* Fix hy balance refresh
 
 
 
