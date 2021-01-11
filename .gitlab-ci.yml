@@ -34,7 +34,7 @@ interface:
     - fi
     - "git clone -n https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/hybrix/hybrixd/common.git --depth 10 --single-branch --branch master"
     - cd common
-    -   "git checkout"
+    - "git checkout"
     - cd ..
 
     # compile in release mode (uglified and minified)
