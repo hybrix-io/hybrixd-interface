@@ -107,8 +107,8 @@ hybrixd:
     - setup_docker
     - build
   except:
-   refs:
-     - tags
+    refs:
+      - tags
   only:
     variables:
       - $TEST_ENABLED
@@ -123,15 +123,15 @@ test:
   coverage: /SUCCESS RATE[^|]*\:[^|]*\s+([\d\.]+)/
   dependencies:
     - hybrixd
-  except:
-   refs:
-     - tags
   artifacts:
     reports:
       junit: test*.xml
   only:
     variables:
       - $TEST_ENABLED
+  except:
+   refs:
+     - tags
 
 dist:
   stage: release
