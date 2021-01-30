@@ -1,3 +1,12 @@
+# v0.6.8
+## 30-01-2021
+
+* Add encryption by default option to rout and addHost methods
+* Add specialized hosts. These will only be used when specified.
+
+
+
+
 # v0.6.7
 ## 11-01-2021
 
