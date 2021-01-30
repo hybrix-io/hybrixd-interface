@@ -96,7 +96,6 @@ hybrixd:
     # prettify json in .versions
     - echo "const fs = require('fs'); const obj = JSON.parse(fs.readFileSync('versions.json', 'utf8')); fs.writeFileSync('versions.json', JSON.stringify(obj, null, 4));" > prettify.js
     - node prettify.js && rm prettify.js
-
   except:
     refs:
       - tags
