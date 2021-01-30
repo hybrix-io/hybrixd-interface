@@ -14,7 +14,7 @@ rsync -ra --rsh="$RELEASE_OPTIONS" "./hybrix-lib.web.js" "$RELEASE_TARGET/hybrix
 rsync -ra --rsh="$RELEASE_OPTIONS" "./hybrix-lib.nodejs.js" "$RELEASE_TARGET/hybrix-jslib/latest/hybrix-lib.nodejs.js"
 
 echo "[.] Copying to version folder"
-rsync -ra --rsh="$RELEASE_OPTIONS" "./hybrix-lib.web.js" "$RELEASE_TARGET/hybrix-jslib/$VERSION/hybrix-lib.web.js"
+rsync -ra --rsync-path="mkdir -p $RELEASE_DIR/hybrix-jslib/$VERSION/ && rsync" --rsh="$RELEASE_OPTIONS" "./hybrix-lib.web.js" "$RELEASE_TARGET/hybrix-jslib/$VERSION/hybrix-lib.web.js"
 rsync -ra --rsh="$RELEASE_OPTIONS" "./hybrix-lib.nodejs.js" "$RELEASE_TARGET/hybrix-jslib/$VERSION/hybrix-lib.nodejs.js"
 
 export PATH="$OLDPATH"
