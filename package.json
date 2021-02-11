@@ -18,6 +18,7 @@
     "setup:dev": "sh ./scripts/npm/setup.sh 'dev'",
     "compile": "sh ./scripts/npm/compile.sh",
     "diag": "sh scripts/npm/diag.sh",
+    "audit": "sh scripts/npm/audit.sh",
     "dist": "sh ./scripts/npm/dist.sh",
     "build": "sh ./scripts/npm/compile.sh; sh ./scripts/npm/dist.sh",
     "check": "sh scripts/npm/check.sh",

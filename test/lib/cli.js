@@ -1,5 +1,4 @@
 const main = require('./main.js');
-const hostTest = require('../hosts/lib/main.js');
 const stdio = require('stdio');
 const fs = require('fs');
 const progress = require('./../util/progressbar');
@@ -30,7 +29,7 @@ const hybrix = new Hybrix.Interface({http: require('http'), https: require('http
 
 DEBUG = ops.debug;
 
-const test = typeof ops.testhost !== 'undefined' ? hostTest : main;
+const test = main;
 
 const renderTable = data => {
   if (ops.xml) {
