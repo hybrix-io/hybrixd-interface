@@ -1,3 +1,11 @@
+# v0.6.9
+## 11-03-2021
+
+* Improve auto config.
+* Audit improvements
+
+
+
 # v0.6.8
 ## 30-01-2021
 
