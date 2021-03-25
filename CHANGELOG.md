@@ -1,3 +1,12 @@
+# v0.6.10
+## 25-03-2021
+
+* Increase pending time threshold: wait a bit longer for slow transactions.
+* Sanitize hostname: don't break over a missing slash at the end
+
+
+
+
 # v0.6.9
 ## 11-03-2021
 
