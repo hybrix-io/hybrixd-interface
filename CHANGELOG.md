@@ -1,3 +1,13 @@
+# v0.6.11
+## 06-04-2021
+
+* Smart handling of address prefixes. 
+* Prevent passing expanded unified addresses for transaction review.
+* Fix handling errors in decoding of unified addresses.
+
+
+
+
 # v0.6.10
 ## 25-03-2021
 
