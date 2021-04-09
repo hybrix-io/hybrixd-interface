@@ -1,3 +1,13 @@
+# v0.6.12
+## 09-04-2021
+
+* Define specific hosts per pending transaction type
+* Reset hosts on logout
+
+
+
+
+
 # v0.6.11
 ## 06-04-2021
 
