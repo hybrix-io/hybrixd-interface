@@ -1,3 +1,14 @@
+# v0.6.13
+## 22-04-2021
+
+* Added data option to rout method for POST requests.
+* Use POST for large save requests
+* Improvement to unified transaction fee feedback
+
+
+
+
+
 # v0.6.12
 ## 09-04-2021
 
