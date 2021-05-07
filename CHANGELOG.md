@@ -1,3 +1,11 @@
+# v0.6.14
+## 07-05-2021
+
+* Add toggle for adding to pending list.
+
+
+
+
 # v0.6.13
 ## 22-04-2021
 
