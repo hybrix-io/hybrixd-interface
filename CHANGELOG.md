@@ -1,3 +1,12 @@
+# v0.6.16
+## 05-06-2021
+
+* Implement fee sufficiency checks on refresh
+* Add base assets automatically
+
+
+
+
 # v0.6.15
 ## 13-05-2021
 
