@@ -1,3 +1,11 @@
+# v0.6.17
+## 10-06-2021
+
+* Improve unified transaction feedback and performance
+
+
+
+
 # v0.6.16
 ## 05-06-2021
 
