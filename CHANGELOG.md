@@ -1,3 +1,13 @@
+# v0.6.18
+## 29-06-2021
+
+* Refresh asset before validating available funds for transaction
+* Add mode to private key import
+* Allow for async rout
+
+
+
+
 # v0.6.17
 ## 10-06-2021
 
