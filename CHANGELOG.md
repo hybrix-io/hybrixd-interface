@@ -1,3 +1,14 @@
+# v0.6.19
+## 09-07-2021
+
+* Add universal login to session method
+* Implement caches getValuation method
+* getFee method for general and unified assets
+
+
+
+
+
 # v0.6.18
 ## 29-06-2021
 
